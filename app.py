@@ -304,7 +304,7 @@ elif st.session_state.step in [2, 3]:
         user_prompt = st.text_area(
             label="prompt", label_visibility="collapsed",
             placeholder="Escribe aquí tu prompt...\n\nTip: sé específico, da contexto, define el tono y el formato.",
-            height=140, key="prompt_input"
+            height=140
         )
         chars = len(user_prompt)
         st.caption(f"{'🟢' if chars>30 else '🔴'} {chars} caracteres {'· ¡Listo!' if chars>=10 else '· Mínimo 10 caracteres'}")
@@ -361,7 +361,7 @@ elif st.session_state.step in [2, 3]:
                     f"Evalúa estos criterios: (1) Especificidad y claridad, (2) Contexto dado, (3) Formato solicitado, (4) Relación con el ejercicio. "
                     f"Si el prompt tiene menos de 20 palabras o es vago, el score NO puede superar 45. "
                     f'Responde SOLO con JSON sin markdown: '
-                    f'{{"score":30,"title":"Título honesto según calidad real","description":"Una oración clara sobre la calidad","improve":"Aspecto más crítico a mejorar","suggest":"Sugerencia concreta y específica","good":"Solo si algo estuvo bien, si no escribe: Ningún elemento destacable"}}'
+                    f'{{"score":30,"title":"Título honesto según calidad real","description":"Una oración clara sobre la calidad","improve":"Aspecto más crítico a mejorar","suggest":"Sugerencia concreta y específica","good":"Si algo estuvo bien mencionarlo con entusiasmo. Si nada estuvo bien, escribe un mensaje motivador como: Vas por buen camino, solo necesitas más detalle. ¡Cada intento te acerca más!"}}'
                 )
                 result = json.loads(raw.replace("```json","").replace("```","").strip())
                 st.session_state.feedback = result
