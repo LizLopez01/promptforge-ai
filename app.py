@@ -8,7 +8,8 @@ load_dotenv()
 
 st.set_page_config(page_title="PromptForge AI · ITJOLI", page_icon="⚡", layout="centered")
 
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+# Lee desde Streamlit Cloud secrets o desde .env local
+GROQ_API_KEY = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY"))
 
 def call_ai(prompt: str) -> str:
     response = requests.post(
