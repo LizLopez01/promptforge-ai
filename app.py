@@ -95,9 +95,11 @@ html,body,[class*="css"]{font-family:'Inter',sans-serif!important;background-col
 .tn{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#4050FF,#00D4FF);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;flex-shrink:0}
 .tt{font-size:13px;font-weight:600;color:#E8EEFF;margin-bottom:2px}
 .td{font-size:12px;color:rgba(200,210,255,0.5);line-height:1.5}
-div[data-testid="stTextInput"] input,div[data-testid="stTextArea"] textarea{background:rgba(255,255,255,0.05)!important;border:1px solid rgba(255,255,255,0.12)!important;border-radius:12px!important;color:#E8EEFF!important;font-size:14px!important}
-div[data-testid="stTextInput"] input:focus,div[data-testid="stTextArea"] textarea:focus{border-color:rgba(0,212,255,0.5)!important;box-shadow:0 0 0 2px rgba(0,212,255,0.1)!important}
+div[data-testid="stTextInput"] input,div[data-testid="stTextArea"] textarea{background:rgba(20,20,50,0.9)!important;border:1px solid rgba(255,255,255,0.12)!important;border-radius:12px!important;color:#E8EEFF!important;font-size:14px!important;caret-color:#00D4FF!important}
+div[data-testid="stTextInput"] input:focus,div[data-testid="stTextArea"] textarea:focus{border-color:rgba(0,212,255,0.5)!important;box-shadow:0 0 0 2px rgba(0,212,255,0.1)!important;color:#E8EEFF!important}
+div[data-testid="stTextInput"] input::placeholder,div[data-testid="stTextArea"] textarea::placeholder{color:rgba(200,210,255,0.3)!important}
 div[data-testid="stTextInput"] label,div[data-testid="stTextArea"] label{color:rgba(200,210,255,0.5)!important;font-size:12px!important}
+textarea{color:#E8EEFF!important;background:rgba(20,20,50,0.9)!important}
 .stButton>button{border-radius:12px!important;font-weight:600!important;font-size:13px!important;transition:all 0.2s!important}
 .stButton>button[kind="primary"]{background:linear-gradient(135deg,#4050FF,#00D4FF)!important;border:none!important;color:white!important;box-shadow:0 4px 15px rgba(64,80,255,0.35)!important}
 .stButton>button[kind="secondary"]{background:rgba(255,255,255,0.05)!important;border:1px solid rgba(255,255,255,0.12)!important;color:rgba(200,210,255,0.8)!important}
