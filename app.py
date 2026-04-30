@@ -351,12 +351,17 @@ elif st.session_state.step in [2, 3]:
         with st.spinner("🤖 Analizando tu prompt..."):
             try:
                 raw = call_ai(
-                    f"Eres evaluador experto en prompt engineering. "
-                    f'Ejercicio: "{st.session_state.exercise}" | '
-                    f"Profesión: {st.session_state.profession} | "
-                    f'Prompt del usuario: "{user_prompt}" | '
+                    f"Eres un evaluador ESTRICTO y HONESTO de prompt engineering. "
+                    f"Tu misión es evaluar con rigor real si el prompt es bueno o malo. "
+                    f"Un prompt vago, corto, sin contexto, sin formato definido o sin instrucciones claras DEBE recibir menos de 40 puntos. "
+                    f"Solo prompts bien estructurados, específicos y contextualizados merecen más de 70 puntos. "
+                    f'Ejercicio planteado: "{st.session_state.exercise}" | '
+                    f"Profesión del usuario: {st.session_state.profession} | "
+                    f'Prompt escrito por el usuario: "{user_prompt}" | '
+                    f"Evalúa estos criterios: (1) Especificidad y claridad, (2) Contexto dado, (3) Formato solicitado, (4) Relación con el ejercicio. "
+                    f"Si el prompt tiene menos de 20 palabras o es vago, el score NO puede superar 45. "
                     f'Responde SOLO con JSON sin markdown: '
-                    f'{{"score":75,"title":"Título","description":"Una oración","improve":"Qué mejorar","suggest":"Sugerencia","good":"Qué hizo bien"}}'
+                    f'{{"score":30,"title":"Título honesto según calidad real","description":"Una oración clara sobre la calidad","improve":"Aspecto más crítico a mejorar","suggest":"Sugerencia concreta y específica","good":"Solo si algo estuvo bien, si no escribe: Ningún elemento destacable"}}'
                 )
                 result = json.loads(raw.replace("```json","").replace("```","").strip())
                 st.session_state.feedback = result
