@@ -546,28 +546,12 @@ if st.session_state.step == 0:
 # ── PASO 1 ────────────────────────────────────────────────────────────────────
 elif st.session_state.step == 1:
 
-    st.markdown('<div class="lbl">🌐 elige tu idioma / choose your language</div>', unsafe_allow_html=True)
-    lang_options = {
-        "🇪🇸 Español": "Español",
-        "🇺🇸 English": "English",
-        "🇧🇷 Português": "Português",
-        "🇫🇷 Français": "Français"
-    }
-    selected_lang = st.radio(
-        label="idioma",
-        label_visibility="collapsed",
-        options=list(lang_options.keys()),
-        horizontal=True,
-        index=0
-    )
-    new_lang = lang_options[selected_lang]
-    if new_lang != st.session_state.language:
-        st.session_state.language = new_lang
-        st.session_state.exercise = ""
-        st.session_state.feedback = None
-        st.session_state.rewrite = None
-        st.rerun()
-    st.markdown("<br>", unsafe_allow_html=True)
+
+    # Mostrar idioma seleccionado como badge (no editable)
+    lang_flags = {"Español":"🇪🇸","English":"🇺🇸","Português":"🇧🇷","Français":"🇫🇷"}
+    flag = lang_flags.get(st.session_state.language, "🌐")
+    st.markdown(f'<div style="text-align:right;margin-bottom:0.5rem;"><span style="background:rgba(0,180,255,0.1);border:1px solid rgba(0,180,255,0.3);color:#00C8FF;font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;">{flag} {st.session_state.language}</span></div>', unsafe_allow_html=True)
+
 
     st.markdown(f'<div class="lbl">{T("area_label")}</div>', unsafe_allow_html=True)
     c1,c2,c3 = st.columns(3)
