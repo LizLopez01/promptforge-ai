@@ -23,7 +23,7 @@ def call_ai(prompt: str) -> str:
 def init_state():
     defaults = {"step": 1, "profession": "", "exercise": "", "level": 1,
                 "scores": [], "history": [], "done": 0, "feedback": None,
-                "rewrite": None, "show_rewrite": False}
+                "rewrite": None, "show_rewrite": False, "language": "Español"}
     for k, v in defaults.items():
         if k not in st.session_state:
             st.session_state[k] = v
@@ -244,6 +244,24 @@ render_steps()
 
 # ── PASO 1 ────────────────────────────────────────────────────────────────────
 if st.session_state.step == 1:
+
+    st.markdown('<div class="lbl">🌐 elige tu idioma / choose your language</div>', unsafe_allow_html=True)
+    lang_options = {
+        "🇪🇸 Español": "Español",
+        "🇺🇸 English": "English",
+        "🇧🇷 Português": "Português",
+        "🇫🇷 Français": "Français"
+    }
+    selected_lang = st.radio(
+        label="idioma",
+        label_visibility="collapsed",
+        options=list(lang_options.keys()),
+        horizontal=True,
+        index=0
+    )
+    st.session_state.language = lang_options[selected_lang]
+    st.markdown("<br>", unsafe_allow_html=True)
+
     st.markdown('<div class="lbl">¿en qué área trabajas?</div>', unsafe_allow_html=True)
     c1,c2,c3 = st.columns(3)
     chips = [("📣","Marketing Digital"),("🏥","Salud y Medicina"),("💼","Administración"),
@@ -293,11 +311,16 @@ elif st.session_state.step in [2, 3]:
     if not st.session_state.exercise:
         with st.spinner("✨ Generando tu ejercicio personalizado..."):
             try:
+                lang = st.session_state.language
                 ex = call_ai(
-                    f"Genera UN ejercicio de prompt engineering de nivel {lv_desc[level]} "
-                    f"para alguien que trabaja en: {st.session_state.profession}. "
-                    f"Situación REAL de su trabajo. Máximo 3-4 oraciones. "
-                    f"Solo el texto del ejercicio, sin títulos ni numeración."
+                    f"Generate ONE prompt engineering exercise at level {lv_desc[level]} "
+                    f"for someone who works in: {st.session_state.profession}. "
+                    f"Real work situation. Max 3-4 sentences. Only the exercise text, no titles. "
+                    f"IMPORTANT: Write the entire response in {lang}. "
+                    f"If {lang} is Español, respond in Spanish. "
+                    f"If {lang} is English, respond in English. "
+                    f"If {lang} is Português, respond in Portuguese. "
+                    f"If {lang} is Français, respond in French."
                 )
                 st.session_state.exercise = ex
             except Exception as e:
@@ -360,18 +383,20 @@ elif st.session_state.step in [2, 3]:
     if eval_clicked and chars >= 10:
         with st.spinner("🤖 Analizando tu prompt..."):
             try:
+                lang = st.session_state.language
                 raw = call_ai(
-                    f"Eres un evaluador ESTRICTO y HONESTO de prompt engineering. "
-                    f"Tu misión es evaluar con rigor real si el prompt es bueno o malo. "
-                    f"Un prompt vago, corto, sin contexto, sin formato definido o sin instrucciones claras DEBE recibir menos de 40 puntos. "
-                    f"Solo prompts bien estructurados, específicos y contextualizados merecen más de 70 puntos. "
-                    f'Ejercicio planteado: "{st.session_state.exercise}" | '
-                    f"Profesión del usuario: {st.session_state.profession} | "
-                    f'Prompt escrito por el usuario: "{user_prompt}" | '
-                    f"Evalúa estos criterios: (1) Especificidad y claridad, (2) Contexto dado, (3) Formato solicitado, (4) Relación con el ejercicio. "
-                    f"Si el prompt tiene menos de 20 palabras o es vago, el score NO puede superar 45. "
-                    f'Responde SOLO con JSON sin markdown: '
-                    f'{{"score":30,"title":"Título honesto según calidad real","description":"Una oración clara sobre la calidad","improve":"Aspecto más crítico a mejorar","suggest":"Sugerencia concreta y específica","good":"Si algo estuvo bien mencionarlo con entusiasmo. Si nada estuvo bien, escribe un mensaje motivador como: Vas por buen camino, solo necesitas más detalle. ¡Cada intento te acerca más!"}}'
+                    f"You are a STRICT and HONEST prompt engineering evaluator. "
+                    f"Evaluate rigorously if the prompt is good or bad. "
+                    f"Vague, short, context-free prompts MUST score below 40. "
+                    f"Only well-structured, specific, contextualized prompts deserve above 70. "
+                    f'Exercise: "{st.session_state.exercise}" | '
+                    f"Profession: {st.session_state.profession} | "
+                    f'User prompt: "{user_prompt}" | '
+                    f"Criteria: (1) Specificity, (2) Context, (3) Format requested, (4) Relevance to exercise. "
+                    f"If prompt is less than 20 words or vague, score CANNOT exceed 45. "
+                    f"IMPORTANT: Write all text fields in {lang}. "
+                    f'Respond ONLY with JSON no markdown: '
+                    f'{{"score":30,"title":"honest title","description":"one sentence","improve":"critical aspect","suggest":"concrete suggestion","good":"enthusiastic if good, motivating message if not"}}'
                 )
                 result = json.loads(raw.replace("```json","").replace("```","").strip())
                 st.session_state.feedback = result
@@ -419,13 +444,15 @@ elif st.session_state.step in [2, 3]:
             if st.button("✨ Reescribir con IA", use_container_width=True):
                 with st.spinner("🪄 Mejorando tu prompt..."):
                     try:
+                        lang = st.session_state.language
                         rw = call_ai(
-                            f"Eres experto en prompt engineering. "
-                            f"Profesión: {st.session_state.profession} | "
-                            f'Ejercicio: "{st.session_state.exercise}" | '
-                            f'Prompt original: "{user_prompt}" | '
-                            f"Reescribe mejorando: especificidad, contexto, tono y formato. "
-                            f"Responde SOLO con el prompt mejorado."
+                            f"You are a prompt engineering expert. "
+                            f"Profession: {st.session_state.profession} | "
+                            f'Exercise: "{st.session_state.exercise}" | '
+                            f'Original prompt: "{user_prompt}" | '
+                            f"Rewrite improving: specificity, context, tone and format. "
+                            f"Respond ONLY with the improved prompt. "
+                            f"Write the improved prompt in {lang}."
                         )
                         st.session_state.rewrite = rw.strip()
                         st.session_state.show_rewrite = True
