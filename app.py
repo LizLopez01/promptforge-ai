@@ -704,17 +704,33 @@ elif st.session_state.step in [2, 3]:
                 )
                 # Clean and parse JSON robustly
                 import re as _re
-                clean = raw
-                clean = clean.replace("```json","").replace("```","").strip()
-                # Extract JSON object if surrounded by extra text
-                match = _re.search(r'\{.*\}', clean, _re.DOTALL)
+                clean = raw.strip()
+                # Remove markdown code blocks
+                clean = _re.sub(r'```(?:json)?', '', clean).strip()
+                # Extract only the JSON object
+                match = _re.search(r'\{[^{}]*\}', clean, _re.DOTALL)
                 if match:
                     clean = match.group(0)
-                # Fix common JSON issues: single quotes, trailing commas
-                clean = clean.replace("'", '"')
-                clean = _re.sub(r',\s*}', '}', clean)
-                clean = _re.sub(r',\s*]', ']', clean)
-                result = json.loads(clean)
+                # Fix trailing commas
+                clean = _re.sub(r',(\s*[}\]])', r'', clean)
+                try:
+                    result = json.loads(clean)
+                except Exception:
+                    # Fallback: extract fields manually with regex
+                    def extract(field):
+                        m = _re.search(rf'"{field}"\s*:\s*"([^"]*)"', clean)
+                        return m.group(1) if m else "—"
+                    def extract_num(field):
+                        m = _re.search(rf'"{field}"\s*:\s*(\d+)', clean)
+                        return int(m.group(1)) if m else 30
+                    result = {
+                        "score": extract_num("score"),
+                        "title": extract("title"),
+                        "description": extract("description"),
+                        "improve": extract("improve"),
+                        "suggest": extract("suggest"),
+                        "good": extract("good")
+                    }
                 st.session_state.feedback = result
                 st.session_state.show_rewrite = False
                 st.session_state.rewrite = None
