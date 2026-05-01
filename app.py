@@ -101,9 +101,7 @@ TEXTS = {
         "why_3_desc": "Basic → Intermediate → Advanced based on your progress.",
         "exercise_label": "📋 your exercise",
         "prompt_label": "✍️ write your prompt",
-        "prompt_placeholder": "Write your prompt here...
-
-Tip: be specific, give context, define tone and format.",
+        "prompt_placeholder": "Write your prompt here...\n\nTip: be specific, give context, define tone and format.",
         "chars_ready": "· Ready!",
         "chars_min": "· Minimum 10 characters",
         "chars_label": "characters",
@@ -155,9 +153,7 @@ Tip: be specific, give context, define tone and format.",
         "why_3_desc": "Básico → Intermediário → Avançado conforme seu progresso.",
         "exercise_label": "📋 seu exercício",
         "prompt_label": "✍️ escreva seu prompt",
-        "prompt_placeholder": "Escreva seu prompt aqui...
-
-Dica: seja específico, dê contexto, defina tom e formato.",
+        "prompt_placeholder": "Escreva seu prompt aqui...\n\nDica: seja específico, dê contexto, defina tom e formato.",
         "chars_ready": "· Pronto!",
         "chars_min": "· Mínimo 10 caracteres",
         "chars_label": "caracteres",
@@ -209,9 +205,7 @@ Dica: seja específico, dê contexto, defina tom e formato.",
         "why_3_desc": "Basique → Intermédiaire → Avancé selon vos progrès.",
         "exercise_label": "📋 votre exercice",
         "prompt_label": "✍️ écrivez votre prompt",
-        "prompt_placeholder": "Écrivez votre prompt ici...
-
-Conseil: soyez précis, donnez du contexte, définissez le ton et le format.",
+        "prompt_placeholder": "Écrivez votre prompt ici...\n\nConseil: soyez précis, donnez du contexte, définissez le ton et le format.",
         "chars_ready": "· Prêt!",
         "chars_min": "· Minimum 10 caractères",
         "chars_label": "caractères",
