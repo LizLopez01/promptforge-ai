@@ -681,18 +681,26 @@ elif st.session_state.step in [2, 3]:
             try:
                 lang = st.session_state.language
                 raw = call_ai(
-                    f"You are a STRICT and HONEST prompt engineering evaluator. "
-                    f"Evaluate rigorously if the prompt is good or bad. "
-                    f"Vague, short, context-free prompts MUST score below 40. "
-                    f"Only well-structured, specific, contextualized prompts deserve above 70. "
-                    f'Exercise: "{st.session_state.exercise}" | '
-                    f"Profession: {st.session_state.profession} | "
-                    f'User prompt: "{user_prompt}" | '
-                    f"Criteria: (1) Specificity, (2) Context, (3) Format requested, (4) Relevance to exercise. "
-                    f"If prompt is less than 20 words or vague, score CANNOT exceed 45. "
+                    f"You are an EXTREMELY STRICT prompt engineering evaluator. Your job is to grade honestly and harshly. "
+                    f"SCORING RULES — follow these exactly, no exceptions: "
+                    f"- Score 0-10: The prompt is completely off-topic, nonsensical, greeting, or has zero relation to the exercise. Example: 'hello', 'who am I', 'hola'. "
+                    f"- Score 11-25: The prompt is related to the topic but has no structure, no context, no format, just 1-2 vague words or sentences. "
+                    f"- Score 26-45: The prompt shows some understanding but lacks specificity, context or format definition. "
+                    f"- Score 46-65: The prompt is decent, addresses the exercise but misses important elements like tone, format or constraints. "
+                    f"- Score 66-80: Good prompt with context, format and relevance to exercise but could be more precise. "
+                    f"- Score 81-100: Excellent. Specific, contextualized, defines tone, format, constraints and is perfectly aligned to the exercise. "
+                    f"CRITICAL RULES: "
+                    f"1. If the prompt has NO relation to the exercise topic, score MUST be 0-10. NO EXCEPTIONS. "
+                    f"2. If the prompt is a greeting, question about identity, or random text, score MUST be 0-5. "
+                    f"3. If the prompt is less than 15 words, score CANNOT exceed 30. "
+                    f"4. If the prompt does not address the exercise at all, score MUST be below 15. "
+                    f"5. Never give more than 50 points to a prompt that lacks explicit context about profession or task. "
+                    f'Exercise given to user: "{st.session_state.exercise}" | '
+                    f"User profession: {st.session_state.profession} | "
+                    f'Prompt written by user: "{user_prompt}" | '
                     f"IMPORTANT: Write all text fields in {lang}. "
-                    f'Respond ONLY with JSON no markdown: '
-                    f'{{"score":30,"title":"honest title","description":"one sentence","improve":"critical aspect","suggest":"concrete suggestion","good":"enthusiastic if good, motivating message if not"}}'
+                    f'Respond ONLY with this exact JSON, no markdown: '
+                    f'{{"score":5,"title":"short honest verdict","description":"one clear sentence about quality","improve":"the most critical thing missing","suggest":"one concrete specific suggestion","good":"honest encouragement if any, or motivating message if nothing was good"}}'
                 )
                 result = json.loads(raw.replace("```json","").replace("```","").strip())
                 st.session_state.feedback = result
