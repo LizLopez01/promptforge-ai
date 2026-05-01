@@ -15,7 +15,7 @@ def call_ai(prompt: str) -> str:
     response = requests.post(
         "https://api.groq.com/openai/v1/chat/completions",
         headers={"Authorization": f"Bearer {GROQ_API_KEY}", "Content-Type": "application/json"},
-        json={"model": "llama-3.3-70b-versatile", "messages": [{"role": "user", "content": prompt}], "max_tokens": 1000}
+        json={"model": "llama-3.3-70b-versatile", "messages": [{"role": "user", "content": prompt}], "max_tokens": 1000, "temperature": 0.1, "seed": 42}
     )
     response.raise_for_status()
     return response.json()["choices"][0]["message"]["content"].strip()
