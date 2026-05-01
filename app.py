@@ -477,13 +477,24 @@ if st.session_state.step == 1:
         horizontal=True,
         index=0
     )
-    st.session_state.language = lang_options[selected_lang]
+    new_lang = lang_options[selected_lang]
+    if new_lang != st.session_state.language:
+        st.session_state.language = new_lang
+        st.session_state.exercise = ""
+        st.session_state.feedback = None
+        st.session_state.rewrite = None
+        st.rerun()
     st.markdown("<br>", unsafe_allow_html=True)
 
     st.markdown(f'<div class="lbl">{T("area_label")}</div>', unsafe_allow_html=True)
     c1,c2,c3 = st.columns(3)
-    chips = [("📣","Marketing Digital"),("🏥","Salud y Medicina"),("💼","Administración"),
-             ("📚","Educación"),("👥","Recursos Humanos"),("💻","Tecnología")]
+    chips_by_lang = {
+        "Español":   [("📣","Marketing Digital"),("🏥","Salud y Medicina"),("💼","Administración"),("📚","Educación"),("👥","Recursos Humanos"),("💻","Tecnología")],
+        "English":   [("📣","Digital Marketing"),("🏥","Health & Medicine"),("💼","Business Admin"),("📚","Education"),("👥","Human Resources"),("💻","Technology")],
+        "Português": [("📣","Marketing Digital"),("🏥","Saúde e Medicina"),("💼","Administração"),("📚","Educação"),("👥","Recursos Humanos"),("💻","Tecnologia")],
+        "Français":  [("📣","Marketing Digital"),("🏥","Santé & Médecine"),("💼","Administration"),("📚","Éducation"),("👥","Ressources Humaines"),("💻","Technologie")],
+    }
+    chips = chips_by_lang.get(st.session_state.language, chips_by_lang["Español"])
     for i,(icon,label) in enumerate(chips):
         col = [c1,c2,c3][i%3]
         with col:
@@ -507,13 +518,13 @@ if st.session_state.step == 1:
             st.session_state.show_rewrite = False
             st.rerun()
 
-    st.markdown("""
+    st.markdown(f"""
     <br>
     <div class="tip-card">
-      <div class="lbl" style="margin-bottom:12px;">💡 ¿por qué aprender prompt engineering?</div>
-      <div class="ti"><div class="tn">1</div><div><div class="tt">Habilidad #1 emergente</div><div class="td">WEF 2025 y Forrester 2026: la skill más demandada.</div></div></div>
-      <div class="ti"><div class="tn">2</div><div><div class="tt">Ejercicios de tu trabajo real</div><div class="td">La IA genera situaciones de tu profesión específica.</div></div></div>
-      <div class="ti"><div class="tn">3</div><div><div class="tt">Sube de nivel automáticamente</div><div class="td">Básico → Intermedio → Avanzado según tu progreso.</div></div></div>
+      <div class="lbl" style="margin-bottom:12px;">{T("why_label")}</div>
+      <div class="ti"><div class="tn">1</div><div><div class="tt">{T("why_1_title")}</div><div class="td">{T("why_1_desc")}</div></div></div>
+      <div class="ti"><div class="tn">2</div><div><div class="tt">{T("why_2_title")}</div><div class="td">{T("why_2_desc")}</div></div></div>
+      <div class="ti"><div class="tn">3</div><div><div class="tt">{T("why_3_title")}</div><div class="td">{T("why_3_desc")}</div></div></div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -574,13 +585,13 @@ elif st.session_state.step in [2, 3]:
                 st.rerun()
 
     with col_tips:
-        st.markdown("""
+        st.markdown(f"""
         <div class="tip-card">
-          <div class="lbl" style="margin-bottom:10px;">🎯 tips para un buen prompt</div>
-          <div class="ti"><div class="tn">1</div><div><div class="tt">Sé específico</div><div class="td">Define exactamente qué quieres.</div></div></div>
-          <div class="ti"><div class="tn">2</div><div><div class="tt">Da contexto</div><div class="td">Explica quién eres y para qué.</div></div></div>
-          <div class="ti"><div class="tn">3</div><div><div class="tt">Define el tono</div><div class="td">Formal, técnico, simple...</div></div></div>
-          <div class="ti"><div class="tn">4</div><div><div class="tt">Pide formato</div><div class="td">Lista, tabla, párrafo, pasos...</div></div></div>
+          <div class="lbl" style="margin-bottom:10px;">{T("tips_label")}</div>
+          <div class="ti"><div class="tn">1</div><div><div class="tt">{T("tip_1_title")}</div><div class="td">{T("tip_1_desc")}</div></div></div>
+          <div class="ti"><div class="tn">2</div><div><div class="tt">{T("tip_2_title")}</div><div class="td">{T("tip_2_desc")}</div></div></div>
+          <div class="ti"><div class="tn">3</div><div><div class="tt">{T("tip_3_title")}</div><div class="td">{T("tip_3_desc")}</div></div></div>
+          <div class="ti"><div class="tn">4</div><div><div class="tt">{T("tip_4_title")}</div><div class="td">{T("tip_4_desc")}</div></div></div>
         </div>
         """, unsafe_allow_html=True)
         st.markdown("<br>", unsafe_allow_html=True)
