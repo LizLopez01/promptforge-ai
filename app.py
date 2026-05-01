@@ -702,7 +702,19 @@ elif st.session_state.step in [2, 3]:
                     f'Respond ONLY with this exact JSON, no markdown: '
                     f'{{"score":5,"title":"short honest verdict","description":"one clear sentence about quality","improve":"the most critical thing missing","suggest":"one concrete specific suggestion","good":"honest encouragement if any, or motivating message if nothing was good"}}'
                 )
-                result = json.loads(raw.replace("```json","").replace("```","").strip())
+                # Clean and parse JSON robustly
+                import re as _re
+                clean = raw
+                clean = clean.replace("```json","").replace("```","").strip()
+                # Extract JSON object if surrounded by extra text
+                match = _re.search(r'\{.*\}', clean, _re.DOTALL)
+                if match:
+                    clean = match.group(0)
+                # Fix common JSON issues: single quotes, trailing commas
+                clean = clean.replace("'", '"')
+                clean = _re.sub(r',\s*}', '}', clean)
+                clean = _re.sub(r',\s*]', ']', clean)
+                result = json.loads(clean)
                 st.session_state.feedback = result
                 st.session_state.show_rewrite = False
                 st.session_state.rewrite = None
