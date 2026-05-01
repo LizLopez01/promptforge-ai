@@ -49,9 +49,7 @@ TEXTS = {
         "why_3_desc": T("why_3_desc"),
         "exercise_label": "📋 tu ejercicio",
         "prompt_label": "✍️ escribe tu prompt",
-        "prompt_placeholder": "Escribe aquí tu prompt...
-
-Tip: sé específico, da contexto, define el tono y el formato.",
+        "prompt_placeholder": "Escribe aquí tu prompt...\n\nTip: sé específico, da contexto, define el tono y el formato.",
         "chars_ready": "· ¡Listo!",
         "chars_min": "· Mínimo 10 caracteres",
         "chars_label": "caracteres",
