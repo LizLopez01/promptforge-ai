@@ -510,8 +510,7 @@ if st.session_state.step == 0:
             selected = st.session_state.language == lang
             btn_style = "primary" if selected else "secondary"
             if st.button(
-                f"{flag}
-{lang}",
+                f"{flag} {lang}",
                 key=f"lang_welcome_{i}",
                 use_container_width=True,
                 type=btn_style
