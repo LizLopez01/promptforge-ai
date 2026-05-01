@@ -30,6 +30,231 @@ def init_state():
 
 init_state()
 
+# ── TRADUCCIONES ─────────────────────────────────────────────────────────────
+TEXTS = {
+    "Español": {
+        "lang_label": "🌐 Elige tu idioma",
+        "area_label": "¿en qué área trabajas?",
+        "area_hint": "Selecciona una opción o escribe tu profesión. La IA adaptará cada ejercicio a tu contexto real.",
+        "profession_input": T("profession_input"),
+        "profession_placeholder": T("profession_placeholder"),
+        "start_btn": "🚀 Comenzar mi entrenamiento",
+        "warning_profession": T("warning_profession"),
+        "why_label": T("why_label"),
+        "why_1_title": T("why_1_title"),
+        "why_1_desc": T("why_1_desc"),
+        "why_2_title": T("why_2_title"),
+        "why_2_desc": T("why_2_desc"),
+        "why_3_title": T("why_3_title"),
+        "why_3_desc": T("why_3_desc"),
+        "exercise_label": "📋 tu ejercicio",
+        "prompt_label": "✍️ escribe tu prompt",
+        "prompt_placeholder": "Escribe aquí tu prompt...
+
+Tip: sé específico, da contexto, define el tono y el formato.",
+        "chars_ready": "· ¡Listo!",
+        "chars_min": "· Mínimo 10 caracteres",
+        "chars_label": "caracteres",
+        "eval_btn": "⭐ Evaluar prompt",
+        "new_ex_btn": T("new_ex_btn"),
+        "tips_label": T("tips_label"),
+        "tip_1_title": T("tip_1_title"), "tip_1_desc": T("tip_1_desc"),
+        "tip_2_title": T("tip_2_title"), "tip_2_desc": T("tip_2_desc"),
+        "tip_3_title": T("tip_3_title"), "tip_3_desc": T("tip_3_desc"),
+        "tip_4_title": T("tip_4_title"), "tip_4_desc": T("tip_4_desc"),
+        "session_label": T("session_label"),
+        "done_label": T("done_label"), "avg_label": T("avg_label"), "level_label": "Nivel",
+        "spinner_ex": T("spinner_ex"),
+        "spinner_eval": T("spinner_eval"),
+        "spinner_rw": T("spinner_rw"),
+        "error_connect": "❌ Error al conectar:",
+        "eval_section": T("eval_section"),
+        "improve_lbl": T("improve_lbl"), "suggest_lbl": T("suggest_lbl"), "good_lbl": T("good_lbl"),
+        "rewrite_btn": T("rewrite_btn"),
+        "next_btn": T("next_btn"),
+        "progress_btn": T("progress_btn"),
+        "rewrite_hdr": T("rewrite_hdr"),
+        "orig_lbl": T("orig_lbl"), "improved_lbl": T("improved_lbl"),
+        "progress_label": T("progress_label"),
+        "exercises_lbl": T("exercises_lbl"), "best_lbl": T("best_lbl"), "level_curr": T("level_curr"),
+        "history_lbl": T("history_lbl"),
+        "export_btn": T("export_btn"),
+        "clear_btn": T("clear_btn"),
+        "continue_btn": "🚀 Seguir practicando",
+        "empty_history": T("empty_history"),
+        "lv1": "⚡ Nivel Básico", "lv2": "🔥 Nivel Intermedio", "lv3": "💎 Nivel Avanzado",
+        "steps": ["🎯 Profesión", "📝 Ejercicio", "⭐ Evaluación", "📊 Progreso"],
+        "clase_badge": T("clase_badge"),
+    },
+    "English": {
+        "lang_label": "🌐 Choose your language",
+        "area_label": "What field do you work in?",
+        "area_hint": "Select an option or type your profession. AI will adapt each exercise to your real context.",
+        "profession_input": "✏️ Or type your profession:",
+        "profession_placeholder": "E.g.: UX Designer, Accountant, Lawyer, Chef...",
+        "start_btn": "🚀 Start my training",
+        "warning_profession": "⚠️ Please enter your profession first.",
+        "why_label": "💡 Why learn prompt engineering?",
+        "why_1_title": "Skill #1 emerging",
+        "why_1_desc": "WEF 2025 and Forrester 2026: the most in-demand skill.",
+        "why_2_title": "Real work exercises",
+        "why_2_desc": "AI generates situations from your specific profession.",
+        "why_3_title": "Level up automatically",
+        "why_3_desc": "Basic → Intermediate → Advanced based on your progress.",
+        "exercise_label": "📋 your exercise",
+        "prompt_label": "✍️ write your prompt",
+        "prompt_placeholder": "Write your prompt here...
+
+Tip: be specific, give context, define tone and format.",
+        "chars_ready": "· Ready!",
+        "chars_min": "· Minimum 10 characters",
+        "chars_label": "characters",
+        "eval_btn": "⭐ Evaluate prompt",
+        "new_ex_btn": "🔄 New exercise",
+        "tips_label": "🎯 tips for a good prompt",
+        "tip_1_title": "Be specific", "tip_1_desc": "Define exactly what you want.",
+        "tip_2_title": "Give context", "tip_2_desc": "Explain who you are and why.",
+        "tip_3_title": "Define tone", "tip_3_desc": "Formal, technical, simple...",
+        "tip_4_title": "Ask for format", "tip_4_desc": "List, table, paragraph, steps...",
+        "session_label": "📊 current session",
+        "done_label": "Done", "avg_label": "Average", "level_label": "Level",
+        "spinner_ex": "✨ Generating your personalized exercise...",
+        "spinner_eval": "🤖 Analyzing your prompt...",
+        "spinner_rw": "🪄 Improving your prompt...",
+        "error_connect": "❌ Connection error:",
+        "eval_section": "prompt evaluation",
+        "improve_lbl": "⚠ What to improve", "suggest_lbl": "💡 Suggestion", "good_lbl": "✅ What you did well",
+        "rewrite_btn": "✨ Rewrite with AI",
+        "next_btn": "➡️ Next exercise",
+        "progress_btn": "📊 View my progress",
+        "rewrite_hdr": "✨ AI improved version",
+        "orig_lbl": "Your original prompt", "improved_lbl": "Improved version",
+        "progress_label": "📊 session summary",
+        "exercises_lbl": "Exercises", "best_lbl": "Best score", "level_curr": "Current level",
+        "history_lbl": "🕐 history",
+        "export_btn": "⬇️ Export JSON",
+        "clear_btn": "🗑️ Clear history",
+        "continue_btn": "🚀 Keep practicing",
+        "empty_history": "🎯 Complete your first exercise to see history here.",
+        "lv1": "⚡ Basic Level", "lv2": "🔥 Intermediate Level", "lv3": "💎 Advanced Level",
+        "steps": ["🎯 Profession", "📝 Exercise", "⭐ Evaluation", "📊 Progress"],
+        "clase_badge": "🎓 AI Class",
+    },
+    "Português": {
+        "lang_label": "🌐 Escolha seu idioma",
+        "area_label": "Em que área você trabalha?",
+        "area_hint": "Selecione uma opção ou escreva sua profissão. A IA adaptará cada exercício ao seu contexto real.",
+        "profession_input": "✏️ Ou escreva sua profissão:",
+        "profession_placeholder": "Ex: Designer UX, Contador, Advogado, Chef...",
+        "start_btn": "🚀 Começar meu treinamento",
+        "warning_profession": "⚠️ Por favor, insira sua profissão primeiro.",
+        "why_label": "💡 Por que aprender prompt engineering?",
+        "why_1_title": "Habilidade #1 emergente",
+        "why_1_desc": "WEF 2025 e Forrester 2026: a skill mais demandada.",
+        "why_2_title": "Exercícios do seu trabalho real",
+        "why_2_desc": "A IA gera situações da sua profissão específica.",
+        "why_3_title": "Suba de nível automaticamente",
+        "why_3_desc": "Básico → Intermediário → Avançado conforme seu progresso.",
+        "exercise_label": "📋 seu exercício",
+        "prompt_label": "✍️ escreva seu prompt",
+        "prompt_placeholder": "Escreva seu prompt aqui...
+
+Dica: seja específico, dê contexto, defina tom e formato.",
+        "chars_ready": "· Pronto!",
+        "chars_min": "· Mínimo 10 caracteres",
+        "chars_label": "caracteres",
+        "eval_btn": "⭐ Avaliar prompt",
+        "new_ex_btn": "🔄 Novo exercício",
+        "tips_label": "🎯 dicas para um bom prompt",
+        "tip_1_title": "Seja específico", "tip_1_desc": "Defina exatamente o que quer.",
+        "tip_2_title": "Dê contexto", "tip_2_desc": "Explique quem você é e para quê.",
+        "tip_3_title": "Defina o tom", "tip_3_desc": "Formal, técnico, simples...",
+        "tip_4_title": "Peça formato", "tip_4_desc": "Lista, tabela, parágrafo, passos...",
+        "session_label": "📊 sessão atual",
+        "done_label": "Feitos", "avg_label": "Média", "level_label": "Nível",
+        "spinner_ex": "✨ Gerando seu exercício personalizado...",
+        "spinner_eval": "🤖 Analisando seu prompt...",
+        "spinner_rw": "🪄 Melhorando seu prompt...",
+        "error_connect": "❌ Erro de conexão:",
+        "eval_section": "avaliação do seu prompt",
+        "improve_lbl": "⚠ O que melhorar", "suggest_lbl": "💡 Sugestão", "good_lbl": "✅ O que você fez bem",
+        "rewrite_btn": "✨ Reescrever com IA",
+        "next_btn": "➡️ Próximo exercício",
+        "progress_btn": "📊 Ver meu progresso",
+        "rewrite_hdr": "✨ Versão melhorada pela IA",
+        "orig_lbl": "Seu prompt original", "improved_lbl": "Versão melhorada",
+        "progress_label": "📊 resumo da sessão",
+        "exercises_lbl": "Exercícios", "best_lbl": "Melhor pontuação", "level_curr": "Nível atual",
+        "history_lbl": "🕐 histórico",
+        "export_btn": T("export_btn"),
+        "clear_btn": "🗑️ Limpar histórico",
+        "continue_btn": "🚀 Continuar praticando",
+        "empty_history": "🎯 Complete seu primeiro exercício para ver o histórico aqui.",
+        "lv1": "⚡ Nível Básico", "lv2": "🔥 Nível Intermediário", "lv3": "💎 Nível Avançado",
+        "steps": ["🎯 Profissão", "📝 Exercício", "⭐ Avaliação", "📊 Progresso"],
+        "clase_badge": "🎓 Aula de IA",
+    },
+    "Français": {
+        "lang_label": "🌐 Choisissez votre langue",
+        "area_label": "Dans quel domaine travaillez-vous?",
+        "area_hint": "Sélectionnez une option ou écrivez votre profession. L'IA adaptera chaque exercice à votre contexte réel.",
+        "profession_input": "✏️ Ou écrivez votre profession:",
+        "profession_placeholder": "Ex: Designer UX, Comptable, Avocat, Chef...",
+        "start_btn": "🚀 Commencer ma formation",
+        "warning_profession": "⚠️ Veuillez entrer votre profession d'abord.",
+        "why_label": "💡 Pourquoi apprendre le prompt engineering?",
+        "why_1_title": "Compétence #1 émergente",
+        "why_1_desc": "WEF 2025 et Forrester 2026: la compétence la plus demandée.",
+        "why_2_title": "Exercices de votre vrai travail",
+        "why_2_desc": "L'IA génère des situations de votre profession spécifique.",
+        "why_3_title": "Montez de niveau automatiquement",
+        "why_3_desc": "Basique → Intermédiaire → Avancé selon vos progrès.",
+        "exercise_label": "📋 votre exercice",
+        "prompt_label": "✍️ écrivez votre prompt",
+        "prompt_placeholder": "Écrivez votre prompt ici...
+
+Conseil: soyez précis, donnez du contexte, définissez le ton et le format.",
+        "chars_ready": "· Prêt!",
+        "chars_min": "· Minimum 10 caractères",
+        "chars_label": "caractères",
+        "eval_btn": "⭐ Évaluer le prompt",
+        "new_ex_btn": "🔄 Nouvel exercice",
+        "tips_label": "🎯 conseils pour un bon prompt",
+        "tip_1_title": "Soyez précis", "tip_1_desc": "Définissez exactement ce que vous voulez.",
+        "tip_2_title": "Donnez du contexte", "tip_2_desc": "Expliquez qui vous êtes et pourquoi.",
+        "tip_3_title": "Définissez le ton", "tip_3_desc": "Formel, technique, simple...",
+        "tip_4_title": "Demandez un format", "tip_4_desc": "Liste, tableau, paragraphe, étapes...",
+        "session_label": "📊 session actuelle",
+        "done_label": "Faits", "avg_label": "Moyenne", "level_label": "Niveau",
+        "spinner_ex": "✨ Génération de votre exercice personnalisé...",
+        "spinner_eval": "🤖 Analyse de votre prompt...",
+        "spinner_rw": "🪄 Amélioration de votre prompt...",
+        "error_connect": "❌ Erreur de connexion:",
+        "eval_section": "évaluation de votre prompt",
+        "improve_lbl": "⚠ À améliorer", "suggest_lbl": "💡 Suggestion", "good_lbl": "✅ Ce que vous avez bien fait",
+        "rewrite_btn": "✨ Réécrire avec l'IA",
+        "next_btn": "➡️ Exercice suivant",
+        "progress_btn": "📊 Voir mes progrès",
+        "rewrite_hdr": "✨ Version améliorée par l'IA",
+        "orig_lbl": "Votre prompt original", "improved_lbl": "Version améliorée",
+        "progress_label": "📊 résumé de la session",
+        "exercises_lbl": "Exercices", "best_lbl": "Meilleur score", "level_curr": "Niveau actuel",
+        "history_lbl": "🕐 historique",
+        "export_btn": "⬇️ Exporter JSON",
+        "clear_btn": "🗑️ Effacer l'historique",
+        "continue_btn": "🚀 Continuer à pratiquer",
+        "empty_history": "🎯 Complétez votre premier exercice pour voir l'historique ici.",
+        "lv1": "⚡ Niveau Basique", "lv2": "🔥 Niveau Intermédiaire", "lv3": "💎 Niveau Avancé",
+        "steps": ["🎯 Profession", "📝 Exercice", "⭐ Évaluation", "📊 Progrès"],
+        "clase_badge": "🎓 Cours IA",
+    }
+}
+
+def T(key):
+    lang = st.session_state.get("language", "Español")
+    return TEXTS.get(lang, TEXTS["Español"]).get(key, key)
+
+
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
@@ -230,7 +455,7 @@ st.markdown("""
 # STEPS
 def render_steps():
     s = st.session_state.step
-    items = [("🎯","Profesión"),("📝","Ejercicio"),("⭐","Evaluación"),("📊","Progreso")]
+    items = list(zip(["🎯","📝","⭐","📊"], T("steps")))
     html = '<div class="steps-wrap">'
     for i,(icon,label) in enumerate(items,1):
         cls = "sp done" if i<s else ("sp active" if i==s else "sp")
@@ -262,7 +487,7 @@ if st.session_state.step == 1:
     st.session_state.language = lang_options[selected_lang]
     st.markdown("<br>", unsafe_allow_html=True)
 
-    st.markdown('<div class="lbl">¿en qué área trabajas?</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="lbl">{T("area_label")}</div>', unsafe_allow_html=True)
     c1,c2,c3 = st.columns(3)
     chips = [("📣","Marketing Digital"),("🏥","Salud y Medicina"),("💼","Administración"),
              ("📚","Educación"),("👥","Recursos Humanos"),("💻","Tecnología")]
@@ -273,14 +498,14 @@ if st.session_state.step == 1:
                 st.session_state.profession = label
                 st.rerun()
 
-    profession = st.text_input("✏️ O escribe tu profesión:", value=st.session_state.profession,
-                                placeholder="Ej: Diseñador UX, Contador, Abogado, Chef...")
+    profession = st.text_input(T("profession_input"), value=st.session_state.profession,
+                                placeholder=T("profession_placeholder"))
     st.session_state.profession = profession
     st.markdown("<br>", unsafe_allow_html=True)
 
-    if st.button("🚀 Comenzar mi entrenamiento", type="primary", use_container_width=True):
+    if st.button(T("start_btn"), type="primary", use_container_width=True):
         if not profession.strip():
-            st.warning("⚠️ Por favor ingresa tu profesión primero.")
+            st.warning(T("warning_profession"))
         else:
             st.session_state.step = 2
             st.session_state.exercise = ""
@@ -302,14 +527,14 @@ if st.session_state.step == 1:
 # ── PASO 2 + 3 ────────────────────────────────────────────────────────────────
 elif st.session_state.step in [2, 3]:
     level = st.session_state.level
-    lv_labels = {1:"⚡ Nivel Básico", 2:"🔥 Nivel Intermedio", 3:"💎 Nivel Avanzado"}
+    lv_labels = {1:T("lv1"), 2:T("lv2"), 3:T("lv3")}
     lv_cls    = {1:"lv1", 2:"lv2", 3:"lv3"}
     lv_desc   = {1:"básico (simple y directo)",
                  2:"intermedio (con contexto y restricciones específicas)",
                  3:"avanzado (complejo, multi-paso)"}
 
     if not st.session_state.exercise:
-        with st.spinner("✨ Generando tu ejercicio personalizado..."):
+        with st.spinner(T("spinner_ex")):
             try:
                 lang = st.session_state.language
                 ex = call_ai(
@@ -324,30 +549,30 @@ elif st.session_state.step in [2, 3]:
                 )
                 st.session_state.exercise = ex
             except Exception as e:
-                st.error(f"❌ Error al conectar: {e}")
+                st.error(f"{T('error_connect')} {e}")
                 st.stop()
 
     col_ex, col_tips = st.columns([3, 2])
 
     with col_ex:
         st.markdown(f'<div class="{lv_cls[level]}">{lv_labels[level]}</div>', unsafe_allow_html=True)
-        st.markdown('<div class="lbl">📋 tu ejercicio</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="lbl">{T("exercise_label")}</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="exbox">{st.session_state.exercise}</div>', unsafe_allow_html=True)
-        st.markdown('<div class="lbl">✍️ escribe tu prompt</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="lbl">{T("prompt_label")}</div>', unsafe_allow_html=True)
         user_prompt = st.text_area(
             label="prompt", label_visibility="collapsed",
-            placeholder="Escribe aquí tu prompt...\n\nTip: sé específico, da contexto, define el tono y el formato.",
+            placeholder=T("prompt_placeholder"),
             height=140
         )
         chars = len(user_prompt)
-        st.caption(f"{'🟢' if chars>30 else '🔴'} {chars} caracteres {'· ¡Listo!' if chars>=10 else '· Mínimo 10 caracteres'}")
+        st.caption(f"{'🟢' if chars>30 else '🔴'} {chars} caracteres {T("chars_ready") if chars>=10 else T("chars_min")}")
 
         ca, cb = st.columns(2)
         with ca:
-            eval_clicked = st.button("⭐ Evaluar prompt", type="primary",
+            eval_clicked = st.button(T("eval_btn"), type="primary",
                                       use_container_width=True, disabled=chars < 10)
         with cb:
-            if st.button("🔄 Nuevo ejercicio", use_container_width=True):
+            if st.button(T("new_ex_btn"), use_container_width=True):
                 st.session_state.exercise = ""
                 st.session_state.feedback = None
                 st.session_state.rewrite = None
@@ -373,7 +598,7 @@ elif st.session_state.step in [2, 3]:
         <div class="gc" style="padding:1rem;">
           <div class="lbl" style="margin-bottom:8px;">📊 sesión actual</div>
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;">
-            <div><div style="font-size:22px;font-weight:800;color:#00D4FF">{done}</div><div style="font-size:11px;color:rgba(200,210,255,0.4)">Hechos</div></div>
+            <div><div style="font-size:22px;font-weight:800;color:#00D4FF">{done}</div><div style="font-size:11px;color:rgba(200,210,255,0.4)">{T("done_label")}</div></div>
             <div><div style="font-size:22px;font-weight:800;color:#00FF9D">{avg if scores else '—'}</div><div style="font-size:11px;color:rgba(200,210,255,0.4)">Promedio</div></div>
             <div><div style="font-size:22px;font-weight:800;color:#FB923C">{level}</div><div style="font-size:11px;color:rgba(200,210,255,0.4)">Nivel</div></div>
           </div>
@@ -381,7 +606,7 @@ elif st.session_state.step in [2, 3]:
         """, unsafe_allow_html=True)
 
     if eval_clicked and chars >= 10:
-        with st.spinner("🤖 Analizando tu prompt..."):
+        with st.spinner(T("spinner_eval")):
             try:
                 lang = st.session_state.language
                 raw = call_ai(
@@ -416,7 +641,7 @@ elif st.session_state.step in [2, 3]:
                 st.session_state.step = 3
                 st.rerun()
             except Exception as e:
-                st.error(f"❌ Error al evaluar: {e}")
+                st.error(f"{T('error_connect')} {e}")
 
     if st.session_state.feedback:
         fb = st.session_state.feedback
@@ -441,8 +666,8 @@ elif st.session_state.step in [2, 3]:
 
         c1,c2,c3 = st.columns(3)
         with c1:
-            if st.button("✨ Reescribir con IA", use_container_width=True):
-                with st.spinner("🪄 Mejorando tu prompt..."):
+            if st.button(T("rewrite_btn"), use_container_width=True):
+                with st.spinner(T("spinner_rw")):
                     try:
                         lang = st.session_state.language
                         rw = call_ai(
@@ -458,9 +683,9 @@ elif st.session_state.step in [2, 3]:
                         st.session_state.show_rewrite = True
                         st.rerun()
                     except Exception as e:
-                        st.error(f"❌ {e}")
+                        st.error(f"{T('error_connect')} {e}")
         with c2:
-            if st.button("➡️ Siguiente ejercicio", use_container_width=True):
+            if st.button(T("next_btn"), use_container_width=True):
                 st.session_state.exercise = ""
                 st.session_state.feedback = None
                 st.session_state.rewrite = None
@@ -468,7 +693,7 @@ elif st.session_state.step in [2, 3]:
                 st.session_state.step = 2
                 st.rerun()
         with c3:
-            if st.button("📊 Ver mi progreso", use_container_width=True):
+            if st.button(T("progress_btn"), use_container_width=True):
                 st.session_state.step = 4
                 st.rerun()
 
@@ -521,20 +746,20 @@ elif st.session_state.step == 4:
             </div>
             """, unsafe_allow_html=True)
     else:
-        st.info("🎯 Completa tu primer ejercicio para ver el historial aquí.")
+        st.info(T("empty_history"))
 
     st.markdown("<br>", unsafe_allow_html=True)
     c1,c2,c3 = st.columns(3)
     with c1:
         st.download_button(
-            label="⬇️ Exportar JSON",
+            label=T("export_btn"),
             data=json.dumps({"profesion":st.session_state.profession,"ejercicios_completados":done,
                               "puntaje_promedio":avg,"mejor_puntaje":best,"nivel_alcanzado":level,
                               "historial":st.session_state.history}, indent=2, ensure_ascii=False),
             file_name="promptforge_progreso.json", mime="application/json", use_container_width=True
         )
     with c2:
-        if st.button("🗑️ Limpiar historial", use_container_width=True):
+        if st.button(T("clear_btn"), use_container_width=True):
             for k in ["scores","history"]: st.session_state[k] = []
             st.session_state.done = 0
             st.session_state.level = 1
@@ -542,7 +767,7 @@ elif st.session_state.step == 4:
             st.session_state.rewrite = None
             st.rerun()
     with c3:
-        if st.button("🚀 Seguir practicando", type="primary", use_container_width=True):
+        if st.button(T("continue_btn"), type="primary", use_container_width=True):
             st.session_state.exercise = ""
             st.session_state.feedback = None
             st.session_state.rewrite = None
