@@ -31,13 +31,17 @@ def init_state():
 init_state()
 
 # ── TRADUCCIONES ─────────────────────────────────────────────────────────────
+def T(key):
+    lang = st.session_state.get("language", "Español")
+    return TEXTS.get(lang, TEXTS["Español"]).get(key, key)
+
 TEXTS = {
     "Español": {
         "lang_label": "🌐 Elige tu idioma",
         "area_label": "¿en qué área trabajas?",
         "area_hint": "Selecciona una opción o escribe tu profesión. La IA adaptará cada ejercicio a tu contexto real.",
-        "profession_input": T("profession_input"),
-        "profession_placeholder": T("profession_placeholder"),
+        "profession_input": "✏️ O escribe tu profesión:",
+        "profession_placeholder": "Ej: Diseñador UX, Contador, Abogado, Chef...",
         "start_btn": "🚀 Comenzar mi entrenamiento",
         "warning_profession": T("warning_profession"),
         "why_label": T("why_label"),
@@ -242,9 +246,6 @@ TEXTS = {
     }
 }
 
-def T(key):
-    lang = st.session_state.get("language", "Español")
-    return TEXTS.get(lang, TEXTS["Español"]).get(key, key)
 
 
 st.markdown("""
