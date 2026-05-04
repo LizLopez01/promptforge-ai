@@ -30,6 +30,21 @@ def init_state():
 
 init_state()
 
+def back_home_btn():
+    lang_flags = {"Español":"🇪🇸","English":"🇺🇸","Português":"🇧🇷","Français":"🇫🇷"}
+    flag = lang_flags.get(st.session_state.language, "🌐")
+    col_back = st.columns([1,4])[0]
+    with col_back:
+        if st.button(T("back_home"), key=f"back_{st.session_state.step}", use_container_width=True):
+            st.session_state.step = 0
+            st.session_state.profession = ""
+            st.session_state.exercise = ""
+            st.session_state.feedback = None
+            st.session_state.rewrite = None
+            st.session_state.show_rewrite = False
+            st.rerun()
+
+
 # ── TRADUCCIONES ─────────────────────────────────────────────────────────────
 def T(key):
     lang = st.session_state.get("language", "Español")
@@ -87,6 +102,7 @@ TEXTS = {
         "lv1": "⚡ Nivel Básico", "lv2": "🔥 Nivel Intermedio", "lv3": "💎 Nivel Avanzado",
         "steps": ["🎯 Profesión", "📝 Ejercicio", "⭐ Evaluación", "📊 Progreso"],
         "clase_badge": "🎓 Clase de IA",
+        "back_home": "🏠 Volver al inicio",
     },
     "English": {
         "lang_label": "🌐 Choose your language",
@@ -139,6 +155,7 @@ TEXTS = {
         "lv1": "⚡ Basic Level", "lv2": "🔥 Intermediate Level", "lv3": "💎 Advanced Level",
         "steps": ["🎯 Profession", "📝 Exercise", "⭐ Evaluation", "📊 Progress"],
         "clase_badge": "🎓 AI Class",
+        "back_home": "🏠 Back to home",
     },
     "Português": {
         "lang_label": "🌐 Escolha seu idioma",
@@ -191,6 +208,7 @@ TEXTS = {
         "lv1": "⚡ Nível Básico", "lv2": "🔥 Nível Intermediário", "lv3": "💎 Nível Avançado",
         "steps": ["🎯 Profissão", "📝 Exercício", "⭐ Avaliação", "📊 Progresso"],
         "clase_badge": "🎓 Aula de IA",
+        "back_home": "🏠 Voltar ao início",
     },
     "Français": {
         "lang_label": "🌐 Choisissez votre langue",
@@ -243,6 +261,7 @@ TEXTS = {
         "lv1": "⚡ Niveau Basique", "lv2": "🔥 Niveau Intermédiaire", "lv3": "💎 Niveau Avancé",
         "steps": ["🎯 Profession", "📝 Exercice", "⭐ Évaluation", "📊 Progrès"],
         "clase_badge": "🎓 Cours IA",
+        "back_home": "🏠 Retour à l'accueil",
     }
 }
 
@@ -547,6 +566,7 @@ if st.session_state.step == 0:
 elif st.session_state.step == 1:
 
 
+    back_home_btn()
     # Mostrar idioma seleccionado como badge (no editable)
     lang_flags = {"Español":"🇪🇸","English":"🇺🇸","Português":"🇧🇷","Français":"🇫🇷"}
     flag = lang_flags.get(st.session_state.language, "🌐")
@@ -604,6 +624,7 @@ elif st.session_state.step in [2, 3]:
                  2:"intermedio (con contexto y restricciones específicas)",
                  3:"avanzado (complejo, multi-paso)"}
 
+    back_home_btn()
     if not st.session_state.exercise:
         with st.spinner(T("spinner_ex")):
             try:
@@ -847,6 +868,7 @@ elif st.session_state.step == 4:
     best = max(scores) if scores else 0
     level = st.session_state.level
 
+    back_home_btn()
     st.markdown(f"""
     <div class="lbl">📊 resumen de tu sesión</div>
     <div class="st-row">
