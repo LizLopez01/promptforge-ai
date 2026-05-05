@@ -26,7 +26,7 @@ def call_ai(prompt: str) -> str:
 def init_state():
     defaults = {"step": 0, "profession": "", "exercise": "", "level": 1,
                 "scores": [], "history": [], "done": 0, "feedback": None,
-                "rewrite": None, "show_rewrite": False, "language": "Español", "mode": "learn"}
+                "rewrite": None, "show_rewrite": False, "language": "Español", "mode": "learn", "exercise_history": []}
     for k, v in defaults.items():
         if k not in st.session_state:
             st.session_state[k] = v
@@ -700,13 +700,19 @@ elif st.session_state.step == 1:
         "Español":   [("📣","Marketing Digital"),("🏥","Salud y Medicina"),("💼","Administración"),("📚","Educación"),("👥","Recursos Humanos"),("💻","Tecnología")],
         "English":   [("📣","Digital Marketing"),("🏥","Health & Medicine"),("💼","Business Admin"),("📚","Education"),("👥","Human Resources"),("💻","Technology")],
         "Português": [("📣","Marketing Digital"),("🏥","Saúde e Medicina"),("💼","Administração"),("📚","Educação"),("👥","Recursos Humanos"),("💻","Tecnologia")],
-        "Français":  [("📣","Marketing Digital"),("🏥","Santé & Médecine"),("💼","Administration"),("📚","Éducation"),("👥","Ressources Humaines"),("💻","Technologie")],
+        "Français":  [("📣","Marketing Numérique"),("🏥","Santé & Médecine"),("💼","Administration"),("📚","Éducation"),("👥","Ressources Humaines"),("💻","Technologie")],
     }
     chips = chips_by_lang.get(st.session_state.language, chips_by_lang["Español"])
+    # Map chip labels to profession for current language
+    chip_labels = [label for _, label in chips]
+    # Map to Spanish for internal use (AI works better with Spanish profession names)
+    profession_map = dict(zip(chip_labels, chips_by_lang["Español"]))
+
     for i,(icon,label) in enumerate(chips):
         col = [c1,c2,c3][i%3]
         with col:
             if st.button(f"{icon} {label}", key=f"c{i}", use_container_width=True):
+                # Store translated label for display, keep for AI context
                 st.session_state.profession = label
                 st.rerun()
 
@@ -719,8 +725,10 @@ elif st.session_state.step == 1:
         if not profession.strip():
             st.warning(T("warning_profession"))
         else:
+            # Reset exercise history when starting fresh
             st.session_state.step = 2
             st.session_state.exercise = ""
+            st.session_state.exercise_history = []
             st.session_state.feedback = None
             st.session_state.rewrite = None
             st.session_state.show_rewrite = False
@@ -750,16 +758,26 @@ elif st.session_state.step in [2, 3]:
         with st.spinner(T("spinner_ex")):
             try:
                 lang = st.session_state.language
+                # Build history context to avoid repetition
+                history_ctx = ""
+                if st.session_state.exercise_history:
+                    recent = st.session_state.exercise_history[-5:]
+                    history_ctx = f"IMPORTANT: Do NOT repeat any of these previous exercises: {' | '.join(recent)}. Generate a completely different scenario. "
+
                 ex = call_ai(
                     f"Generate ONE prompt engineering exercise at level {lv_desc[level]} "
                     f"for someone who works in: {st.session_state.profession}. "
-                    f"Real work situation. Max 3-4 sentences. Only the exercise text, no titles. "
+                    f"Real work situation. Max 3-4 sentences. Only the exercise text, no titles, no numbering. "
+                    f"{history_ctx}"
                     f"IMPORTANT: Write the entire response in {lang}. "
                     f"If {lang} is Español, respond in Spanish. "
                     f"If {lang} is English, respond in English. "
                     f"If {lang} is Português, respond in Portuguese. "
                     f"If {lang} is Français, respond in French."
                 )
+                # Save to history
+                if ex not in st.session_state.exercise_history:
+                    st.session_state.exercise_history.append(ex[:80])
                 st.session_state.exercise = ex
             except Exception as e:
                 st.error(f"{T('error_connect')} {e}")
