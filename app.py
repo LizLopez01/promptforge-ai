@@ -919,8 +919,7 @@ elif st.session_state.step in [2, 3]:
         st.markdown(f"""
         <div class="sc-card">
           <div style="text-align:center;flex-shrink:0;">
-            <div class="sc-big {sc}">{score}</div>
-            <div style="font-size:13px;color:rgba(200,210,255,0.4);font-weight:700;margin-top:2px;">/ 100</div>
+            <div class="sc-big {sc}">{score}<span style="font-size:22px;font-weight:600;opacity:0.7;">/100</span></div>
           </div>
           <div>
             <div class="sc-title">{em} {fb.get('title','')}</div>
@@ -1148,8 +1147,7 @@ elif st.session_state.step == 5:
                             gap:1.2rem;margin:1rem 0;">
                   <div style="line-height:1;text-align:center;">
                     <div style="font-size:48px;font-weight:900;color:{score_color};
-                                text-shadow:0 0 20px {score_color}44;">{score}</div>
-                    <div style="font-size:13px;color:rgba(200,210,255,0.4);font-weight:600;margin-top:2px;">/ 100</div>
+                                text-shadow:0 0 20px {score_color}44;">{score}<span style="font-size:20px;font-weight:600;opacity:0.7;">/100</span></div>
                   </div>
                   <div>
                     <div style="font-size:17px;font-weight:700;color:#fff;margin-bottom:4px;">
