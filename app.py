@@ -31,18 +31,14 @@ def init_state():
 init_state()
 
 def back_home_btn():
-    lang_flags = {"Español":"🇪🇸","English":"🇺🇸","Português":"🇧🇷","Français":"🇫🇷"}
-    flag = lang_flags.get(st.session_state.language, "🌐")
-    col_back = st.columns([1,4])[0]
-    with col_back:
-        if st.button(T("back_home"), key=f"back_{st.session_state.step}", use_container_width=True):
-            st.session_state.step = 0
-            st.session_state.profession = ""
-            st.session_state.exercise = ""
-            st.session_state.feedback = None
-            st.session_state.rewrite = None
-            st.session_state.show_rewrite = False
-            st.rerun()
+    if st.button(T("back_home"), key=f"back_{st.session_state.step}"):
+        st.session_state.step = 0
+        st.session_state.profession = ""
+        st.session_state.exercise = ""
+        st.session_state.feedback = None
+        st.session_state.rewrite = None
+        st.session_state.show_rewrite = False
+        st.rerun()
 
 
 # ── TRADUCCIONES ─────────────────────────────────────────────────────────────
@@ -303,7 +299,7 @@ html,body,[class*="css"]{font-family:'Inter',sans-serif!important;background-col
 .sr{color:#F87171;text-shadow:0 0 20px rgba(248,113,113,0.4)}
 .sc-title{font-size:17px;font-weight:700;color:#FFF;margin-bottom:4px}
 .sc-desc{font-size:13px;color:rgba(200,210,255,0.6);line-height:1.5}
-.fb-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:1rem}
+.fb-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:1rem}
 .fb-box{padding:14px;border-radius:14px}
 .fbi{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-top:3px solid #F87171}
 .fbw{background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.25);border-top:3px solid #FB923C}
@@ -313,13 +309,13 @@ html,body,[class*="css"]{font-family:'Inter',sans-serif!important;background-col
 .fb-box p{font-size:13px;line-height:1.55;color:rgba(220,230,255,0.85);margin:0}
 .rw-wrap{background:rgba(128,0,255,0.06);border:1px solid rgba(128,0,255,0.25);border-radius:16px;overflow:hidden;margin-top:1rem}
 .rw-hdr{background:rgba(128,0,255,0.12);padding:10px 16px;font-size:12px;font-weight:700;color:#C084FC;letter-spacing:1px;text-transform:uppercase}
-.rw-grid{display:grid;grid-template-columns:1fr 1fr}
+.rw-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
 .rw-p{padding:14px}
 .rw-p:first-child{border-right:1px solid rgba(128,0,255,0.2)}
 .rw-lbl{font-size:11px;font-weight:600;color:rgba(200,210,255,0.4);margin-bottom:8px;display:flex;align-items:center;gap:6px}
 .rw-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
 .rw-p p{font-family:monospace;font-size:12px;line-height:1.7;color:rgba(220,230,255,0.85);margin:0}
-.st-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.2rem}
+.st-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:1.2rem}
 .st-box{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:14px;text-align:center}
 .st-big{font-size:26px;font-weight:800;line-height:1.1}
 .st-sm{font-size:11px;color:rgba(200,210,255,0.4);margin-top:3px;font-weight:500}
@@ -391,6 +387,43 @@ div[data-testid="stMarkdownContainer"] p{color:rgba(200,210,255,0.7);font-size:1
 small[class*="hint"]{display:none!important}
 textarea + small{display:none!important}
 [data-testid="InputInstructions"]{display:none!important}
+
+/* ── MOBILE RESPONSIVE ── */
+@media (max-width: 640px) {
+  .block-container{padding:0.5rem 0.75rem 2rem!important}
+
+  /* Columns stack vertically on mobile */
+  [data-testid="column"]{min-width:100%!important;width:100%!important}
+  div[data-testid="stHorizontalBlock"]{flex-wrap:wrap!important;gap:8px!important}
+
+  /* Buttons full width on mobile */
+  .stButton>button{width:100%!important;font-size:14px!important;padding:12px!important}
+  .stDownloadButton>button{width:100%!important}
+
+  /* Radio buttons wrap */
+  div[data-testid="stRadio"] > div{flex-wrap:wrap!important;gap:6px!important}
+
+  /* Steps scrollable */
+  .steps-wrap{overflow-x:auto!important;padding:8px!important;gap:2px!important}
+  .sp{padding:4px 8px!important;font-size:11px!important}
+  .sl{min-width:4px!important}
+
+  /* Header compact */
+  .pf-hdr{padding:0.8rem 1rem!important;gap:10px!important}
+
+  /* Welcome screen */
+  .lang-cols-mobile{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important}
+
+  /* Feedback grid stack */
+  .fb-row{grid-template-columns:1fr!important}
+  .st-row{grid-template-columns:1fr 1fr!important}
+
+  /* Score card */
+  .sc-card{flex-direction:column!important;text-align:center!important}
+
+  /* Typography */
+  .sc-big{font-size:42px!important}
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -514,8 +547,10 @@ if st.session_state.step == 0:
     </div>
     """, unsafe_allow_html=True)
 
-    lang_cols = st.columns(4)
     lang_options = [("🇪🇸","Español"),("🇺🇸","English"),("🇧🇷","Português"),("🇫🇷","Français")]
+    row1 = st.columns(2)
+    row2 = st.columns(2)
+    lang_cols = [row1[0], row1[1], row2[0], row2[1]]
     for i, (flag, lang) in enumerate(lang_options):
         with lang_cols[i]:
             btn_type = "primary" if st.session_state.language == lang else "secondary"
@@ -534,7 +569,7 @@ if st.session_state.step == 0:
     """, unsafe_allow_html=True)
 
     # Dos modos
-    col_learn, col_improve = st.columns(2)
+    col_learn, col_improve = st.columns([1,1])
 
     with col_learn:
         st.markdown("""
