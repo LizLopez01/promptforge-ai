@@ -475,8 +475,9 @@ textarea + small{display:none!important}
 </style>
 """, unsafe_allow_html=True)
 
-# HEADER
-st.markdown("""
+# HEADER — solo mostrar en pasos 1-6 (no en bienvenida)
+if st.session_state.step != 0:
+  st.markdown("""
 <div style="
   background: linear-gradient(135deg, #0D1B3E 0%, #0A2050 50%, #0D1B3E 100%);
   border: 1px solid rgba(0,180,255,0.3);
@@ -498,13 +499,15 @@ st.markdown("""
            flex-shrink:0;">
   <div style="flex:1;">
     <div style="
-      font-size:clamp(18px, 4vw, 30px);
+      font-size:clamp(15px, 3.5vw, 28px);
       font-weight:900;
       letter-spacing:-0.5px;
       line-height:1.1;
       margin-bottom:4px;
       font-family:Inter,sans-serif;
       white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     ">
       <span style="color:#FFFFFF;">Prompt</span><span style="
         color:#00C8FF;
@@ -533,15 +536,16 @@ st.markdown("""
     background: linear-gradient(135deg, rgba(0,100,255,0.2), rgba(0,200,255,0.15));
     border: 1px solid rgba(0,200,255,0.4);
     color: #00C8FF;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
-    padding: 8px 18px;
+    padding: 6px 12px;
     border-radius: 50px;
     white-space: nowrap;
     box-shadow: 0 0 15px rgba(0,180,255,0.2);
     letter-spacing: 0.5px;
     font-family:Inter,sans-serif;
-  ">🎓 Clase de IA</div>
+    flex-shrink: 0;
+  ">🎓</div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -558,7 +562,8 @@ def render_steps():
     html += '</div>'
     st.markdown(html, unsafe_allow_html=True)
 
-render_steps()
+if st.session_state.step != 0:
+    render_steps()
 
 # ── PANTALLA DE BIENVENIDA (solo logo + idioma) ─────────────────────────────
 if st.session_state.step == 0:
