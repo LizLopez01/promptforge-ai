@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-st.set_page_config(page_title="PromptForge AI · ITJOLI", page_icon="⚡", layout="centered")
+st.set_page_config(page_title="PROMPTI · ITJOLI", page_icon="🧠", layout="centered")
 
 # Fix viewport for Android
 st.markdown('''<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">''', unsafe_allow_html=True)
@@ -509,11 +509,11 @@ if st.session_state.step != 0:
       overflow:hidden;
       text-overflow:ellipsis;
     ">
-      <span style="color:#FFFFFF;">Prompt</span><span style="
+      <span style="color:#FFFFFF;">PROMP</span><span style="
         color:#00C8FF;
         text-shadow: 0 0 20px rgba(0,200,255,0.8);
-      ">Forge</span>
-      <span style="color:#FFFFFF;"> AI</span>
+      ">TI</span>
+
     </div>
     <div style="
       font-size:13px;
@@ -577,13 +577,16 @@ if st.session_state.step == 0:
                border:3px solid rgba(0,200,255,0.6);
                margin-bottom:1.5rem;">
       <div style="font-size:42px;font-weight:900;letter-spacing:-2px;margin-bottom:6px;font-family:Inter,sans-serif;">
-        <span style="color:#FFFFFF;">Prompt</span><span style="color:#00C8FF;text-shadow:0 0 30px rgba(0,200,255,1);">Forge</span>
-        <span style="color:#FFFFFF;"> AI</span>
+        <span style="color:#FFFFFF;">PROMP</span><span style="color:#00C8FF;text-shadow:0 0 30px rgba(0,200,255,1);">TI</span>
       </div>
-      <div style="font-size:13px;color:rgba(150,200,255,0.6);font-family:Inter,sans-serif;letter-spacing:1px;margin-bottom:4px;">
+      <div style="font-size:13px;color:rgba(150,200,255,0.6);font-family:Inter,sans-serif;letter-spacing:1px;margin-bottom:6px;">
         ITJOLI · Intelligence & AI Group
       </div>
-      <div style="font-size:10px;color:rgba(0,200,255,0.5);letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:2.5rem;">
+      <div style="font-size:18px;color:#00C8FF;font-family:Inter,sans-serif;font-weight:700;
+                  margin-bottom:4px;text-shadow:0 0 15px rgba(0,200,255,0.5);">
+        Aprende a hablar con la IA
+      </div>
+      <div style="font-size:10px;color:rgba(0,200,255,0.4);letter-spacing:3px;text-transform:uppercase;font-weight:600;margin-bottom:2.5rem;">
         Clase de Inteligencia Artificial
       </div>
     </div>
@@ -620,7 +623,7 @@ if st.session_state.step == 0:
 
     st.markdown("""
     <div style="text-align:center;margin-top:2rem;font-size:11px;color:rgba(150,200,255,0.2);letter-spacing:1px;">
-      Powered by Groq + Llama 3.3 · ITJOLI Group © 2026
+      PROMPTI · Aprende a hablar con la IA · ITJOLI Group © 2026
     </div>
     """, unsafe_allow_html=True)
 
@@ -684,7 +687,7 @@ elif st.session_state.step == 6:
 
     st.markdown("""
     <div style="text-align:center;margin-top:2rem;font-size:11px;color:rgba(150,200,255,0.2);letter-spacing:1px;">
-      Powered by Groq + Llama 3.3 · ITJOLI Group © 2026
+      PROMPTI · Aprende a hablar con la IA · ITJOLI Group © 2026
     </div>
     """, unsafe_allow_html=True)
 
